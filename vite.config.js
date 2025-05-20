@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
+  base: '/HandsOnEmDuplaReactJs/', // 👈 Adicionado para GitHub Pages funcionar corretamente
   plugins: [react()],
   resolve: {
     alias: {
@@ -18,4 +19,4 @@ export default defineConfig({
       '@services': path.resolve(__dirname, './src/services'),
     },
   },
-}) 
+})
