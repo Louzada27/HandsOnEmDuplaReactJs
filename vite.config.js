@@ -6,7 +6,6 @@ import { fileURLToPath } from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
-  base: '/HandsOnEmDuplaReactJs/', 
   plugins: [react()],
   resolve: {
     alias: {
@@ -19,7 +18,4 @@ export default defineConfig({
       '@services': path.resolve(__dirname, './src/services'),
     },
   },
-  server: {
-    host: '0.0.0.0',
-    port: parseInt(process.env.PORT) || 5173,
-    allowedHosts: ['handsonemdu]()
+}) 
