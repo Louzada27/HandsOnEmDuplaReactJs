@@ -8,6 +8,7 @@ const __dirname = path.dirname(fileURLToPath(
 
 export default defineConfig({
     plugins: [react()],
+    base: '/HandsOnEmDuplaReactJs/', // 👈 ESSA LINHA É A CORREÇÃO
     resolve: {
         alias: {
             '@': path.resolve(__dirname, './src'),
