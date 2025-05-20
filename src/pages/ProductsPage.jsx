@@ -69,7 +69,7 @@ const ProductsPage = ({ onAddToCart }) => {
                             <div key={product.id} className="col">
                                 <div className="card h-100">
                                     <img
-                                        src={product.image}
+                                        src={product.image_url}
                                         className="card-img-top"
                                         alt={product.title}
                                         style={{ height: 200, objectFit: 'cover' }}
