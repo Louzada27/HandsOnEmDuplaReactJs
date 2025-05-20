@@ -1,6 +1,7 @@
 {
   "name": "react01",
   "private": true,
+  "homepage": "https://louzada27.github.io/HandsOnEmDuplaReactJs",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
