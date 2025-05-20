@@ -5,8 +5,6 @@ import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-
-// https://vite.dev/config/
 export default defineConfig({
   base: '/HandsOnEmDuplaReactJs/', 
   plugins: [react()],
@@ -20,5 +18,9 @@ export default defineConfig({
       '@pages': path.resolve(__dirname, './src/pages'),
       '@services': path.resolve(__dirname, './src/services'),
     },
+  },
+  server: {
+    host: '0.0.0.0',
+    port: parseInt(process.env.PORT) || 5173,
   },
 })
