@@ -92,6 +92,7 @@ const AdminProductsPage = () => {
                             <tr key={product.id}>
                                 <td>{product.id}</td>
                                 <td>
+                                    {/* Campo image_url usado para exibir a miniatura do produto na tabela */}
                                     <img
                                         src={product.image_url}
                                         alt={product.title}
