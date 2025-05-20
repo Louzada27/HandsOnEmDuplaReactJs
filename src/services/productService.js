@@ -1,15 +1,25 @@
-import supabase from './supabase';
+import supabase from '@services/supabase';
 
 const productService = {
-  async getProductsByPage(page = 1, limit = 12) {
+  async getProductsByPage(page = 1, limit = 12, categoryId = null) {
     const from = (page - 1) * limit;
     const to = from + limit - 1;
     
-    const { data, error, count } = await supabase
+    let query = supabase
       .from('products')
-      .select('*', { count: 'exact' })
+      .select(`
+        *,
+        category:categories(name)
+      `, { count: 'exact' })
       .range(from, to)
-      .order('title', { ascending: true });
+      .order('created_at', { ascending: false });
+
+    if (categoryId) {
+      query = query.eq('category_id', categoryId);
+    }
+    
+    const { data, error, count } = await query;
+
     if (error) {
       console.error('Erro ao buscar produtos:', error);
       throw error;
@@ -22,9 +32,17 @@ const productService = {
   },
   
   async getProductById(id) {
+    if (!id) {
+      throw new Error('ID do produto não fornecido');
+    }
+
+    console.log('Buscando produto:', id);
     const { data, error } = await supabase
       .from('products')
-      .select('*')
+      .select(`
+        *,
+        category:categories(name)
+      `)
       .eq('id', id)
       .single();
     if (error) {
@@ -35,10 +53,18 @@ const productService = {
   },
   
   async createProduct(product) {
+    if (!product?.title || !product?.price) {
+      throw new Error('Dados do produto incompletos');
+    }
+
+    console.log('Criando produto:', product);
     const { data, error } = await supabase
       .from('products')
       .insert([product])
-      .select();
+      .select(`
+        *,
+        category:categories(name)
+      `);
     if (error) {
       console.error('Erro ao criar produto:', error);
       throw error;
@@ -47,11 +73,22 @@ const productService = {
   },
   
   async updateProduct(id, product) {
+    if (!id) {
+      throw new Error('ID do produto não fornecido');
+    }
+    if (!product?.title || !product?.price) {
+      throw new Error('Dados do produto incompletos');
+    }
+
+    console.log('Atualizando produto:', { id, product });
     const { data, error } = await supabase
       .from('products')
       .update(product)
       .eq('id', id)
-      .select();
+      .select(`
+        *,
+        category:categories(name)
+      `);
     if (error) {
       console.error('Erro ao atualizar produto:', error);
       throw error;
@@ -60,12 +97,17 @@ const productService = {
   },
 
   async deleteProduct(id) {
+    if (!id) {
+      throw new Error('ID do produto não fornecido');
+    }
+
+    console.log('Excluindo produto:', id);
     const { error } = await supabase
       .from('products')
       .delete()
       .eq('id', id);    
     if (error) {
-      console.error('Erro ao deletar produto:', error);
+      console.error('Erro ao excluir produto:', error);
       throw error;
     }
     return true;

@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import CardsGrid from "@components/CardsGrid";
 import productService from '@services/productService';
+import { Link } from 'react-router-dom';
 
 const HomePage = ({ onAddToCart }) => {
   const { data, isLoading, isError } = useQuery({
@@ -26,7 +27,7 @@ const HomePage = ({ onAddToCart }) => {
         />
       )}
       <div className="mt-4 text-center">
-        <a href="/produtos" className="btn btn-primary">Ver todos os produtos</a>
+        <Link to="/products" className="btn btn-primary">Ver todos os produtos</Link>
       </div>
     </div>
   );

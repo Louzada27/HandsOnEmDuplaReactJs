@@ -5,11 +5,33 @@ import supabase from '@services/supabase';
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-    const [session, setSession] = useState(supabase.auth.getSession()?.data?.session || null);
+    const [session, setSession] = useState(null);
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     const user = session?.user || null;
     const isAdmin = profile?.is_admin || false;
+
+    // Verificar a sessão ao iniciar
+    useEffect(() => {
+        const checkSession = async () => {
+            try {
+                const { data: { session: currentSession } } = await supabase.auth.getSession();
+                if (!currentSession) {
+                    setSession(null);
+                    setProfile(null);
+                } else {
+                    setSession(currentSession);
+                }
+            } catch (error) {
+                console.error('Erro ao verificar sessão:', error);
+                setSession(null);
+                setProfile(null);
+            } finally {
+                setLoading(false);
+            }
+        };
+        checkSession();
+    }, []);
 
     // Buscar o perfil do usuário quando o usuário estiver autenticado
     useEffect(() => {

@@ -73,8 +73,21 @@ const Header = ({ cartCount = 0 }) => {
                   <ul className="dropdown-menu dropdown-menu-end">
                     {isAdmin && (
                       <>
-                        <li><Link className="dropdown-item" to="/admin/users">Usuários</Link></li>
-                        <li><Link className="dropdown-item" to="/admin/products">Produtos</Link></li>
+                        <li className="nav-item">
+                          <Link className="nav-link" to="/admin/products">
+                            Produtos
+                          </Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link className="nav-link" to="/admin/categories">
+                            Categorias
+                          </Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link className="nav-link" to="/admin/users">
+                            Usuários
+                          </Link>
+                        </li>
                         <li><hr className="dropdown-divider" /></li>
                       </>
                     )}
