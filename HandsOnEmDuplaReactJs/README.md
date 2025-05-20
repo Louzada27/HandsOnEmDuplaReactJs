@@ -8,7 +8,7 @@ Esta aplicação é uma loja virtual desenvolvida em React que demonstra diverso
 
 - Componentes funcionais e props
 - Gerenciamento de estado com hooks
-- Navegação com React Router
+- Navegação com React Route
 - Integração com banco de dados (Supabase)
 - Operações CRUD e paginação
 - Autenticação de usuários
